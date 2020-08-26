@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-3">
+        <%= flash[:success] %>
+      <%= render 'users/user', user: @user %>
+      <%= render 'book', book: @book %>
+    </div>
+    <div class="col-xs-9">
+    	<h2>Book detail</h2>
+    	<table class="table">
+    	<tbody>
+    		<tr>
+    			<td><%= link_to user_path(@user) do %>
+                    <%= attachment_image_tag @user, :profile_image, size: "100x100", format: 'jpeg', fallback: "no_image.jpg" %><br>
+                    <%= @user.name %>
+                    <% end %>
+                    </td>
+    			<td><%= @books.title %></td>
+    			<td><%= @books.body %></td>
+                <% if @books.user == current_user %>
+                <td><%= link_to edit_book_path(@books) do %>
+                    <button type="button" class="btn btn-success">Edit</button>
+                    <% end %>
+                </td>
+                <td><%= link_to book_path(@books), method: :delete, "data-confirm" => "削除しますか?" do %>
+                    <button type="button" class="btn btn-danger">Destroy</button>
+                    <% end %>
+                </td>
+                <% end %>
+    		</tr>
+    	</tbody>
+    	</table>
+    </div>
+  </div>
+</div>
